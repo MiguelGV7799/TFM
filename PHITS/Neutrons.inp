@@ -1,0 +1,668 @@
+[Title]
+Sample input for radiation shielding
+
+[Parameters]
+
+ icntl   = 0
+ maxcas  = 1e7
+ maxbch  = 10
+
+e-mode  = 2   
+nucdata = 1     
+dmax(2) = 20.0
+lib(2)=20c
+
+
+# Neutrones
+emin(2) = 1.0e-6   # CAMBIO subir corte n térmico a 1 eV 
+
+# Alfas 
+#emin(18) = 1.0e-3  # DEFAULT 
+
+# Electrones y positrones (EGS5)
+#emin(12) = 1.0e-2  # CAMBIO: 10 keV para e- , EGS (100 keV)
+#emin(13) = 1.0e-2  # CAMBIO: 10 keV para e+
+
+# Fotones
+#emin(14) = 1.0e-3  # DEFAULT 
+negs    = 1        # CAMBIO: activar EGS5 para transporte EM detallado
+ikerman = 1        # CAMBIO: prohibir KERMA para neutrones en t-deposit
+ikermap = 1        # CAMBIO: prohibir KERMA para fotones en t-deposit
+
+#controla la longitud de paso para partículas cargadas en ese material
+chard(1)    = 1.0e-3   # CAMBIO: 1 μm para fuel (radio ~6.2 μm) 
+chard(2) = 1.0e-3   
+chard(3) = 1.0e-3 # CAMBIO: 1 μm para ablator 
+
+kmout   = 1       # CAMBIO: escribir info de librerías nucleares usadas (nuclear data) en phits.out
+icput   = 1       # CAMBIO: tiempos de CPU por proceso  útil para optimizar
+
+
+
+
+[ Source ]
+
+<source> = 2.32110521e-03
+  proj = neutron
+  s-type = 9 # spherical shell
+  r1 =   0.00000e+00 # [cm]
+  r2 =   3.18000e-04 # [cm]
+  dir = all # isotropic
+  e0 = 14.1 # [MeV]
+
+<source> = 1.59490099e-02
+  proj = neutron
+  s-type = 9 # spherical shell
+  r1 =   3.18000e-04 # [cm]
+  r2 =   6.36000e-04 # [cm]
+  dir = all # isotropic
+  e0 = 14.1 # [MeV]
+
+<source> = 4.16954867e-02
+  proj = neutron
+  s-type = 9 # spherical shell
+  r1 =   6.36000e-04 # [cm]
+  r2 =   9.54000e-04 # [cm]
+  dir = all # isotropic
+  e0 = 14.1 # [MeV]
+
+<source> = 7.64699377e-02
+  proj = neutron
+  s-type = 9 # spherical shell
+  r1 =   9.54000e-04 # [cm]
+  r2 =   1.27200e-03 # [cm]
+  dir = all # isotropic
+  e0 = 14.1 # [MeV]
+
+<source> = 1.15464740e-01
+  proj = neutron
+  s-type = 9 # spherical shell
+  r1 =   1.27200e-03 # [cm]
+  r2 =   1.59000e-03 # [cm]
+  dir = all # isotropic
+  e0 = 14.1 # [MeV]
+
+<source> = 1.51983656e-01
+  proj = neutron
+  s-type = 9 # spherical shell
+  r1 =   1.59000e-03 # [cm]
+  r2 =   1.90800e-03 # [cm]
+  dir = all # isotropic
+  e0 = 14.1 # [MeV]
+
+<source> = 1.77321164e-01
+  proj = neutron
+  s-type = 9 # spherical shell
+  r1 =   1.90800e-03 # [cm]
+  r2 =   2.22600e-03 # [cm]
+  dir = all # isotropic
+  e0 = 14.1 # [MeV]
+
+<source> = 1.80964442e-01
+  proj = neutron
+  s-type = 9 # spherical shell
+  r1 =   2.22600e-03 # [cm]
+  r2 =   2.54400e-03 # [cm]
+  dir = all # isotropic
+  e0 = 14.1 # [MeV]
+
+<source> = 1.52044358e-01
+  proj = neutron
+  s-type = 9 # spherical shell
+  r1 =   2.54400e-03 # [cm]
+  r2 =   2.86200e-03 # [cm]
+  dir = all # isotropic
+  e0 = 14.1 # [MeV]
+
+<source> = 8.57861012e-02
+  proj = neutron
+  s-type = 9 # spherical shell
+  r1 =   2.86200e-03 # [cm]
+  r2 =   3.18000e-03 # [cm]
+  dir = all # isotropic
+  e0 = 14.1 # [MeV]
+
+[Material] 
+
+MAT[1]  $ Hotspot DT (50:50 atómico)
+2H 0.5 
+3H 0.5
+
+MAT[2] $ Shell DT (misma estequiometría, otra densidad)
+2H 0.5 
+3H 0.5
+
+MAT[3] $ Ablator CH 
+C 1.0
+
+MAT[4] $ Gas de llenado del hohlraum
+He 1.0
+
+MAT[5]  $ Oro hohlraum
+Au 1.0
+
+MAT[6]  $ Oro hohlraum
+Au 1.0
+
+
+
+[ Mat Name Color ]
+mat   name                      size   color
+0     Void                      1.0    white
+
+1     DT__hotspot                2.0    blue
+2     DT__shell                  2.0    cyan
+3     HDC__ablator                2.5    green
+4     He__hohlraum__gas           1.5    gray
+
+6     Au__hohlraum__original      3.0    pastelyellow
+5     Au__hohlraum__eroded        3.0    orangeyellow
+
+
+
+
+
+[Surface]
+
+$ Combustible comprimido (cm)
+10   SO   3.47e-03       $ R_hotspot 
+11   SO   4.294125e-03       $ R_shell     
+12   SO   4.3375e-03       $ R_ablator  
+
+
+$ Hohlraum 
+
+$ Cavidad central de gas (cilindro)
+$ (radio = R20 = 0.266 cm; mantiene z: -0.465 a +0.465)
+20  RCC   0.0  0.0  -0.465     0.0  0.0   0.93     0.26600
+
+$ Cono truncado interior izquierdo de gas (LEH)
+$ (r_leh = 0.138 cm; r_cavidad = 0.266 cm)
+21  TRC   0.0  0.0  -0.475     0.0  0.0   0.01     0.13800  0.26600
+
+$ Cono truncado interior derecho de gas (LEH)
+22  TRC   0.0  0.0   0.475     0.0  0.0  -0.01     0.13800  0.26600
+
+$ Pared cilíndrica interior del hohlraum original (Au)
+$ (radio = R23 = 0.270 cm; longitud interior entre “tapas” = 0.95 cm = 9.5 mm)
+23  RCC   0.0  0.0  -0.475     0.0  0.0   0.95     0.27000
+
+$ Pared exterior de Au (diámetro exterior 5.5 mm)
+30  RCC   0.0  0.0  -0.480     0.0  0.0   0.96     0.27500
+
+$ Canal/LEH axial (diámetro 2.76 mm)
+31  RCC   0.0  0.0  -0.480     0.0  0.0   0.96     0.13800
+
+$Esfera de detección
+50 SO  1
+
+$ Blindaje externo 
+90   SO   1.1
+
+
+
+
+
+ 
+[Cell]
+$ Hotspot (DT) 
+110    1   -172.65    -10                                           
+
+$  Shell (DT) 
+111    2   -1.15e03      10  -11
+
+$ Ablator (CH) 
+112    3   -1.15e03       11  -12      
+
+$ Gas H2Be dentro del hohlraum
+200    4    -3e-4      (-31 : -21 : -22: -23) #110 #111 #112 #230
+
+$ Pared del hohlraum desprendida (Au)
+230    5   -0.1932     -23   #(-20 : -21 : -22)
+
+$ Hohlraum "original"
+300    6   -19.32      -30 31  #(-20 : -21 : -22) #230
+
+$esfera detección y vacío
+500    0               -50 #(-30)
+501    0               50 -90
+
+  
+
+$ 999: Outer void 
+999    -1              90
+
+
+[ T-gshow ]
+
+mesh = xyz
+
+x-type = 2
+nx = 800
+xmin = -0.6
+xmax =  0.6
+
+y-type = 1
+ny = 1
+-0.1 0.1
+
+z-type = 2
+nz = 1200
+zmin = -0.7
+zmax =  0.7
+
+axis = xz
+
+output = 2
+width = 0.8
+resol = 1.5
+
+title = {Axial section of the PHITS geometry model}
+x-txt = {z [cm]}
+y-txt = {x [cm]}
+
+file = geometry_xz.dat
+epsout = 1
+
+[ T-gshow ]
+mesh = xyz
+
+
+x-type = 2
+nx = 600
+xmin = -0.01
+xmax =  0.01
+
+y-type = 1
+ny = 1
+-0.005 0.005
+
+z-type = 2
+nz = 600
+zmin = -0.01
+zmax =  0.01
+
+axis = xz
+
+output = 2
+width = 0.8
+resol = 1.5
+
+title = {Axial section of the PHITS geometry model}
+x-txt = {z [cm]}
+y-txt = {x [cm]}
+
+file = geometry_xz_zoom.dat
+epsout = 1
+
+
+
+
+[T-Cross]
+  title   = [t-cross] Energy spectrum at R = 1 cm
+
+  mesh    = reg
+  reg     = 1
+  r-from  r-to   area
+     500      501      12.56637061
+
+  part    = neutron 
+
+
+  e-type  = 5
+    edel    = 0.02388482519091565
+    emin  = 1.0e-03
+    emax  = 3.0e+01
+
+  unit    = 2
+  output  = flux
+
+  axis    = eng
+  file    = tcross_spectrum_neutron_flux.out
+  epsout  = 1
+
+
+
+[T-Cross]
+  title   = [t-cross] Energy spectrum at R = 1 cm
+
+  mesh    = reg
+  reg     = 1
+  r-from  r-to   area
+     500      501      12.56637061
+
+part = photon
+
+  e-type  = 3
+    ne    = 700
+    emin  = 1.0e-03
+    emax  = 3.0e+01
+
+  unit    = 2
+  output  = flux
+
+  axis    = eng
+  file    = tcross_spectrum_photon_flux.out
+  epsout  = 1
+
+[T-Cross]
+  title   = [t-cross] Energy spectrum at R = 1 cm
+
+  mesh    = reg
+  reg     = 1
+  r-from  r-to   area
+     500      501      12.56637061
+
+  part    = neutron 
+
+
+  e-type  = 5
+    edel    = 0.02388482519091565 $400 bins hasta 14.1 MeV
+    emin  = 1.0e-03
+    emax  = 3.0e+01
+
+  unit    = 2
+  output  = current
+
+  axis    = eng
+  file    = tcross_spectrum_neutron_current.out
+  epsout  = 1
+
+
+
+[T-Cross]
+  title   = [t-cross] Energy spectrum at R = 1 cm
+
+  mesh    = reg
+  reg     = 1
+  r-from  r-to   area
+     500      501      12.56637061
+
+part = photon
+
+  e-type  = 3
+    ne    = 700
+    emin  = 1.0e-03
+    emax  = 3.0e+01
+
+  unit    = 2
+  output  = current
+
+  axis    = eng
+  file    = tcross_spectrum_photon_current.out
+  epsout  = 1
+
+
+[T-Interact]
+  title   = [t-interact] neutron interactions 
+
+  mesh    = reg
+  reg     =  110   111   112   200   230   300  
+  volume
+ non      reg      vol      
+    1      110   1.750157e-07  
+    2      111   2.3446e-09  
+    3      112   3.4182e-13  
+    4      200   2.09376e-01  
+    5      230   8.19495e-03  
+    6      300   9.91034e-03 
+
+  MorP    = mean
+
+  part    = neutron
+
+  material = all
+     
+  e-type = 3
+    ne   = 1
+      emin = 1.0e-5
+      emax = 3.0e+01
+  unit    = 1
+  output  = all
+
+  axis    = reg
+  file    = tinteract_total.out
+
+  x-txt = (1:Hotspot, 2:Shell, 3:Ablator, 4:Gas, 5:Au despr., 6:Au)
+  angel = XTXT(1) XTXP(0.5) YTXT(1) YTXP(0.5) 
+
+  epsout  = 1
+
+[T-Interact]
+  title   = [t-interact] neutron elastic interactions 
+
+  mesh    = reg
+  reg     =  110   111   112   200   230   300  
+  volume     
+ non      reg      vol      
+    1      110   1.750157e-07  
+    2      111   2.3446e-09  
+    3      112   3.4182e-13  
+    4      200   2.09376e-01  
+    5      230   8.19495e-03  
+    6      300   9.91034e-03 
+
+
+  MorP    = mean
+
+  part    = neutron
+
+  material = all
+     
+  e-type = 3
+    ne   = 1
+      emin = 1.0e-5
+      emax = 3.0e+01
+  unit    = 1
+  output  = elastic
+
+  axis    = reg
+  file    = tinteract_elastic.out
+
+  x-txt = (1:Hotspot, 2:Shell, 3:Ablator, 4:Gas, 5:Au despr., 6:Au)
+  angel = XTXT(1) XTXP(0.5) YTXT(1) YTXP(0.5) 
+
+  epsout  = 1
+
+[T-Interact]
+  title   = [t-interact] neutron elastic interactions 
+
+  mesh    = reg
+  reg     =  110   111   112   200   230   300  
+  volume
+ non      reg      vol      
+   
+    1      110   1.750157e-07  
+    2      111   2.3446e-09  
+    3      112   3.4182e-13  
+    4      200   2.09376e-01  
+    5      230   8.19495e-03  
+    6      300   9.91034e-03 
+
+  MorP    = mean
+
+  part    = neutron
+
+  material = all
+     
+  e-type = 3
+    ne   = 1
+      emin = 1.0e-5
+      emax = 3.0e+01
+  unit    = 1
+  output  = nuclear
+
+  axis    = reg
+  file    = tinteract_nuclear.out
+
+  x-txt = (1:Hotspot, 2:Shell, 3:Ablator, 4:Gas, 5:Au despr., 6:Au)
+  angel = XTXT(1) XTXP(0.5) YTXT(1) YTXP(0.5) 
+
+  epsout  = 1
+
+[T-Interact]
+  title   = [t-interact] neutron elastic interactions 
+
+  mesh    = reg
+  reg     =  110   111   112   200   230   300  
+  volume
+      
+ non      reg      vol      
+    1      110   1.750157e-07  
+    2      111   2.3446e-09  
+    3      112   3.4182e-13  
+    4      200   2.09376e-01  
+    5      230   8.19495e-03  
+    6      300   9.91034e-03 
+
+
+  MorP    = mean
+
+  part    = neutron
+
+  material = all
+     
+  e-type = 3
+    ne   = 1
+      emin = 1.0e-5
+      emax = 3.0e+01
+  unit    = 1
+  output  = absorption
+
+  axis    = reg
+  file    = tinteract_absorption.out
+
+  x-txt = (1:Hotspot, 2:Shell, 3:Ablator, 4:Gas, 5:Au despr., 6:Au)
+  angel = XTXT(1) XTXP(0.5) YTXT(1) YTXP(0.5) 
+
+  epsout  = 1
+
+
+
+[T-Product]
+  title   = [t-product] secondary nucleons & ions from neutrons
+
+  mesh    = reg
+  reg     =  110   111   112   200   230   300  
+  part    = neutron 
+
+  material = all
+
+  e-type  = 3
+    ne    = 300
+    emin  = 1.0e-05
+    emax  = 3.0e+01
+
+  unit    = 1      # [1/source]
+  output  = nonela    
+
+  axis    = eng
+  file    = tproduct_total.out
+
+
+[T-Product]
+  title   = [t-product] secondary nucleons & ions from neutrons
+
+  mesh    = reg
+  reg     =  110   111   112   200   230   300  
+  part    = neutron 
+
+  material = all
+
+  e-type  = 3
+    ne    = 300
+    emin  = 14.1
+    emax  = 3.0e+01
+
+  unit    = 1      # [1source]
+  output  = nonela   # productos de reacciones nucleares 
+
+  axis    = eng
+  file    = tproduct_tail.out
+
+
+[T-Product]
+  title   = [t-product] Photon production atomic
+
+
+  mesh    = reg
+  reg     =  110   111   112   200   230   300  
+  part    = photon 
+
+  material = all
+
+  e-type  = 3
+    ne    = 100
+    emin  = 1.0e-05
+    emax  = 3.0e+03
+
+  unit    = 1      
+  output  = atomic  
+
+  axis    = eng
+  file    = tproduct_photon_atomic.out
+
+
+[T-Product]
+  title   = [t-product] Photon production nuclear
+
+  mesh    = reg
+  reg     =  110   111   112   200   230   300  
+  part    = photon 
+
+  material = all
+
+  e-type  = 3
+    ne    = 100
+    emin  = 1.0e-05
+    emax  = 3.0e+03
+
+  unit    = 1      
+  output  = nuclear   
+
+  axis    = eng
+  file    = tproduct_photon_nuclear.out
+
+
+
+
+[T-Deposit]
+  title   = [t-deposit] neutron energy deposition in main regions
+
+  mesh    = reg
+  reg     =  110   111   112   200   230   300  
+  volume
+ non      reg      vol      
+    1      110   1.750157e-07  
+    2      111   2.3446e-09  
+    3      112   3.4182e-13  
+    4      200   2.09376e-01  
+    5      230   8.19495e-03  
+    6      300   9.91034e-03 
+    
+part= all
+
+  material = all         
+
+  output = dose        # deposición de energía
+  unit   = 2           # [MeV/source]
+
+  axis   = reg         
+  file   = tdeposit.out
+
+  x-txt = (1:Hotspot, 2:Shell, 3:Ablator, 4:Gas, 5:Au despr., 6:Au)
+  angel = XTXT(1) XTXP(0.5) YTXT(1) YTXP(0.5) 
+
+  epsout = 1
+
+
+
+
+
+
+
+
+
+
+
+[END]

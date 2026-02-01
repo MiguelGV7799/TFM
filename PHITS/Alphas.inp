@@ -1,0 +1,427 @@
+[Title]
+Sample input for radiation shielding
+
+[Parameters]
+
+ icntl   = 0
+ maxcas  = 1e6
+ maxbch  = 10
+
+e-mode  = 2    
+nucdata = 1    
+dmax(2) = 20.0     
+
+# Neutrones
+#emin(2) = 1.0e-6   # CAMBIO subir corte n térmico a 1 eV 
+
+# Alfas 
+#emin(18) = 1.0e-3  # CAMBIO
+
+# Electrones y positrones (EGS5)
+#emin(12) = 1.0e-4  # CAMBIO: 10 keV para e- , EGS (100 keV)
+#emin(13) = 1.0e-4  # CAMBIO: 10 keV para e+
+
+# Fotones
+#emin(14) = 1.0e-5  # DEFAULT 
+negs    = 2        # CAMBIO: activar EGS5 para transporte EM detallado
+ikerman = 1        # CAMBIO: prohibir KERMA para neutrones en t-deposit
+ikermap = 1        # CAMBIO: prohibir KERMA para fotones en t-deposit
+
+
+chard(1)    = 1.0e-3   # CAMBIO: 1 μm para fuel (radio ~6.2 μm) 
+chard(2) = 1.0e-3   
+chard(3) = 1.0e-3 # CAMBIO: 1 μm para ablator 
+
+kmout   = 1       # CAMBIO: escribir info de librerías nucleares usadas (nuclear data) en phits.out
+icput   = 1       # CAMBIO: tiempos de CPU por proceso  útil para optimizar
+
+
+[ Source ]
+
+<source> = 1.53436312e-03
+  proj = alpha
+  s-type = 9 # spherical shell
+  r1 =   0.00000e+00 # [cm]
+  r2 =   3.18000e-04 # [cm]
+  dir = all # isotropic
+  e0 = 0.875 # [MeV]
+
+<source> = 1.06809208e-02
+  proj = alpha
+  s-type = 9 # spherical shell
+  r1 =   3.18000e-04 # [cm]
+  r2 =   6.36000e-04 # [cm]
+  dir = all # isotropic
+  e0 = 0.875 # [MeV]
+
+<source> = 2.86543257e-02
+  proj = alpha
+  s-type = 9 # spherical shell
+  r1 =   6.36000e-04 # [cm]
+  r2 =   9.54000e-04 # [cm]
+  dir = all # isotropic
+  e0 = 0.875 # [MeV]
+
+<source> = 5.47074227e-02
+  proj = alpha
+  s-type = 9 # spherical shell
+  r1 =   9.54000e-04 # [cm]
+  r2 =   1.27200e-03 # [cm]
+  dir = all # isotropic
+  e0 = 0.875 # [MeV]
+
+<source> = 8.74163197e-02
+  proj = alpha
+  s-type = 9 # spherical shell
+  r1 =   1.27200e-03 # [cm]
+  r2 =   1.59000e-03 # [cm]
+  dir = all # isotropic
+  e0 = 0.875 # [MeV]
+
+<source> = 1.24208795e-01
+  proj = alpha
+  s-type = 9 # spherical shell
+  r1 =   1.59000e-03 # [cm]
+  r2 =   1.90800e-03 # [cm]
+  dir = all # isotropic
+  e0 = 0.875 # [MeV]
+
+<source> = 1.60511881e-01
+  proj = alpha
+  s-type = 9 # spherical shell
+  r1 =   1.90800e-03 # [cm]
+  r2 =   2.22600e-03 # [cm]
+  dir = all # isotropic
+  e0 = 0.875 # [MeV]
+
+<source> = 1.88228873e-01
+  proj = alpha
+  s-type = 9 # spherical shell
+  r1 =   2.22600e-03 # [cm]
+  r2 =   2.54400e-03 # [cm]
+  dir = all # isotropic
+  e0 = 0.875 # [MeV]
+
+<source> = 1.93094222e-01
+  proj = alpha
+  s-type = 9 # spherical shell
+  r1 =   2.54400e-03 # [cm]
+  r2 =   2.86200e-03 # [cm]
+  dir = all # isotropic
+  e0 = 0.875 # [MeV]
+
+<source> = 1.50962878e-01
+  proj = alpha
+  s-type = 9 # spherical shell
+  r1 =   2.86200e-03 # [cm]
+  r2 =   3.18000e-03 # [cm]
+  dir = all # isotropic
+  e0 = 0.875 # [MeV]
+
+
+
+[Material] 
+
+MAT[1]  $ Hotspot DT (50:50 atómico)
+2H 0.5 
+3H 0.5
+
+MAT[2] $ Shell DT (misma estequiometría, otra densidad)
+2H 0.5 
+3H 0.5
+
+MAT[3] $ Ablator HDC 
+C 1.0
+
+MAT[4] $ Gas de llenado del hohlraum
+He 1.0
+
+MAT[5]  $ Oro hohlraum
+Au 1.0
+
+MAT[6]  $ Oro hohlraum
+Au 1.0
+
+MAT[7] $ Tungsteno blindaje
+W 1.0
+
+[ Mat Name Color ]
+mat   name                      size   color
+0     Void                      1.0    white
+
+1     DT__hotspot                2.0    blue
+2     DT__shell                  2.0    cyan
+3     HDC__ablator                2.5    green
+4     He__hohlraum__gas           1.5    gray
+
+5     Au__hohlraum__original      3.0    pastelyellow
+6     Au__hohlraum__eroded        3.0    orangeyellow
+
+7     W__shield                  3.0    darkgray
+
+
+
+[Surface]
+
+$ Combustible comprimido (cm)
+10   SO   3.47e-03       $ R_hotspot 
+11   SO   4.294125e-03       $ R_shell     
+12   SO   4.3375e-03       $ R_ablator  
+
+
+$ Hohlraum 
+
+$ Cavidad central de gas (cilindro)
+$ (radio = R20 = 0.266 cm; mantiene z: -0.465 a +0.465)
+20  RCC   0.0  0.0  -0.465     0.0  0.0   0.93     0.26600
+
+$ Cono truncado interior izquierdo de gas (LEH)
+$ (r_leh = 0.138 cm; r_cavidad = 0.266 cm)
+21  TRC   0.0  0.0  -0.475     0.0  0.0   0.01     0.13800  0.26600
+
+$ Cono truncado interior derecho de gas (LEH)
+22  TRC   0.0  0.0   0.475     0.0  0.0  -0.01     0.13800  0.26600
+
+$ Pared cilíndrica interior del hohlraum original (Au)
+$ (radio = R23 = 0.270 cm; longitud interior entre “tapas” = 0.95 cm = 9.5 mm)
+23  RCC   0.0  0.0  -0.475     0.0  0.0   0.95     0.27000
+
+$ Pared exterior de Au (diámetro exterior 5.5 mm)
+30  RCC   0.0  0.0  -0.480     0.0  0.0   0.96     0.27500
+
+$ Canal/LEH axial (diámetro 2.76 mm)
+31  RCC   0.0  0.0  -0.480     0.0  0.0   0.96     0.13800
+
+
+$Esfera de detección
+50 SO  4.5e-3
+
+$ Blindaje externo 
+90   SO   1.1
+91   SO   1.2
+
+
+
+
+ 
+[Cell]
+$ Hotspot (DT) 
+110    1   -74.24     -10                                           
+
+$  Shell (DT) 
+111    2   -1.15e03      10  -11
+
+$ Ablator (CH) 
+112    3   -1.15e03       11  -12     
+
+$ Gas H2Be dentro del hohlraum
+200    4    -3e-4      (-31 : -21 : -22: -23) #110 #111 #112 #230
+
+$ Pared del hohlraum desprendida (Au)
+230    5   -0.1932     -23   #(-20 : -21 : -22)
+
+$ Hohlraum "original"
+300    6   -19.32      -30 31  #(-20 : -21 : -22) #230
+
+$esfera detección y vacío
+500    0               -50 #(-30)
+501    0               50 -90
+
+$ Pared del reactor (W)
+900    7   -19.3       -91  90  
+
+$ 999: Outer void 
+999    -1              91
+
+
+
+
+
+
+[T-Deposit]
+  title   = [t-deposit] alpha energy deposition in main regions
+
+  mesh    = reg
+  reg     =  110   111   112   200   230   300  
+  volume
+ non      reg      vol      
+    1      110   1.750157e-07  
+    2      111   2.3446e-09  
+    3      112   3.4182e-13  
+    4      200   2.09376e-01  
+    5      230   8.19495e-03  
+    6      300   9.91034e-03  
+    
+
+     part=all
+
+  material = all         
+
+  output = dose        # deposición de energía
+  unit   = 2           # [MeV/source]
+
+  axis   = reg         
+  file   = tdeposit_alpha.out
+
+  x-txt = (1:Hotspot, 2:Shell, 3:Ablator, 4:Gas, 5:Au despr., 6:Au)
+  angel = XTXT(1) XTXP(0.5) YTXT(1) YTXP(0.5) 
+
+
+
+
+
+
+
+
+[T-Track]
+  title   = [t-track] hotspot fine xz
+  mesh    = xyz
+  x-type  = 2   
+    xmin = -0.0065   
+    xmax = 0.0065   
+    nx = 200
+  y-type  = 2   
+    ymin = -0.0005  
+    ymax = 0.0005  
+    ny =  1
+  z-type  = 2   
+    zmin = -0.0065   
+    zmax = 0.0065   
+    nz = 200
+  e-type  = 1
+    ne    = 1
+           1.0E-10  1.0E+03
+  unit    = 1              # [1/cm^2/source]
+  material= all
+  axis    = xz
+  file    = track_hotspot.out
+  part    =  alpha 
+  gshow   = 1              
+  epsout  = 1
+angel = zlog
+
+
+
+
+
+
+[END]
+
+[T-Cross]
+  title   = [t-cross] Photon Energy spectrum at R = 1 cm
+
+  mesh    = reg
+  reg     = 1
+  r-from  r-to   area
+     500      501      12.56637061
+
+     part =  photon
+
+  e-type  = 3
+    ne    = 700
+    emin  = 1.0e-05
+    emax  = 3.0e+01
+
+  unit    = 2
+  output  = flux
+
+  axis    = eng
+  file    = tcross_spectrum__alpha_photon.out
+  epsout  = 1
+
+
+
+[T-Interact]
+  title   = [t-interact] alpha interactions 
+
+  mesh    = reg
+  reg     =  110   111   112   200   230   300  
+  volume
+ non      reg      vol      
+    1      110   1.750157e-07  
+    2      111   2.3446e-09  
+    3      112   3.4182e-13  
+    4      200   2.09376e-01  
+    5      230   8.19495e-03  
+    6      300   9.91034e-03 
+
+  MorP    = mean
+
+     part =  alpha
+
+
+  material = all
+     
+  e-type = 3
+    ne   = 1
+      emin = 1.0e-5
+      emax = 2.0e+01
+  unit    = 1
+  output  = all
+
+  axis    = reg
+  file    = t_interact_alpha.out
+
+  x-txt = (1:Hotspot, 2:Shell, 3:Ablator, 4:Gas, 5:Au despr., 6:Au)
+  angel = XTXT(1) XTXP(0.5) YTXT(1) YTXP(0.5)
+
+[T-Cross]
+  title   = [t-cross] Alpha Energy spectrum at R = 1 cm
+
+  mesh    = reg
+  reg     = 1
+  r-from  r-to   area
+     500      501      12.56637061
+
+     part =  alpha
+
+  e-type  = 3
+    ne    = 300
+    emin  = 1.0e-03
+    emax  = 2.0e+01
+
+  unit    = 2
+  output  = flux
+
+  axis    = eng
+  file    = tcross_spectrum_alpha.out
+  epsout  = 1 
+
+[T-Product]
+  title   = [t-product] photons from alpha interactions
+
+  mesh    = reg
+  reg     =  110   111   112   200   230   300  
+
+  part    = photon
+  material = all
+
+  e-type  = 3
+    ne    = 300
+    emin  = 1.0e-03
+    emax  = 2.0e+01
+
+  unit    = 1          # [1/cm^3/MeV/source]
+  output  = atomic     # fotones de interacciones atómicas (ionización/excitación)
+
+  axis    = eng
+  file    = tproduct_alpha_gamma_atomic.out
+
+[T-LET]
+  mesh = reg
+  reg  = 110
+  volume
+ non      reg      vol      
+    1      110   1.750157e-07 
+  part = alpha
+  axis = let
+  samepage = reg
+  unit = 4
+  file = tlet_alpha_edep_vs_let.out
+
+  l-type = 3
+  lmin = 1.0E3
+  lmax = 1.0E+6
+  nl   = 80
+
+  epsout = 1
