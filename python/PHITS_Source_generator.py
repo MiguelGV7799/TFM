@@ -1,3 +1,7 @@
+# PHITSFusion © 2026 by Miguel García, Manuel Cotelo
+# Licensed under CC BY-NC-SA 4.0
+# To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-sa/4.0/
+
 import argparse
 import numpy as np
 import scipy as sp
@@ -257,3 +261,4 @@ def phits_input(params):
 
 input_text = phits_input(params)
 print(input_text)
+
