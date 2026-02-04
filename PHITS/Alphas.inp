@@ -1,5 +1,5 @@
 [Title]
-Sample input for radiation shielding
+Alpha source input
 
 [Parameters]
 
@@ -423,5 +423,6 @@ angel = zlog
   lmin = 1.0E3
   lmax = 1.0E+6
   nl   = 80
+
 
   epsout = 1
