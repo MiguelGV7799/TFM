@@ -1,3 +1,7 @@
+# PHITSFusion © 2026 by Miguel García, Manuel Cotelo
+# Licensed under CC BY-NC-SA 4.0
+# To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-sa/4.0/
+
 import pandas as pd
 
 # Archivos
@@ -34,4 +38,5 @@ df = df_total.merge(df_tail, on="reg", suffixes=("_total", "_tail"))
 df["tail_fraction"] = df["N_per_source_tail"] / df["N_per_source_total"]
 
 print(df)
+
 
