@@ -1,3 +1,8 @@
+# PHITSFusion © 2026 by Miguel García, Manuel Cotelo
+# Licensed under CC BY-NC-SA 4.0
+# To view a copy of this license, visit https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+
 import pandas as pd
 
 # Archivos
@@ -51,4 +56,5 @@ df_out = pd.concat([df, total_row], ignore_index=True)
 
 # Mostrar con formato científico
 pd.set_option("display.float_format", "{:.6e}".format)
+
 print(df_out)
