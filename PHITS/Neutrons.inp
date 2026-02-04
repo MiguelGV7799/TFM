@@ -1,5 +1,5 @@
 [Title]
-Sample input for radiation shielding
+Netron source input
 
 [Parameters]
 
@@ -666,3 +666,4 @@ part= all
 
 
 [END]
+
